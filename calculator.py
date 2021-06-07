@@ -84,6 +84,3 @@ class Calculator:
             print(self.triangle_area())
         elif user_input == str(10):
             print(self.circle_area())
-
-    # def triangle_area(self, x: Union[int, float], h: Union[int, float]) -> Union[int, float]:
-    #    return (x * h) / 2
