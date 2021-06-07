@@ -4,50 +4,50 @@ from math import sqrt
 class Calculator:
 
     def addition(self) -> float:
-        a = float(input(f'Give a number: '))
-        b = float(input(f'Give a second number: '))
+        a = float(input(f'Give a first summand: '))
+        b = float(input(f'Give a second summand: '))
         return a + b
 
     def subtraction(self) -> float:
-        a = input(f'Give a number: ')
-        b = input(f'Give second number: ')
-        return int(a) - int(b)
+        a = float(input(f'Give a minuend: '))
+        b = float(input(f'Give a subtrahend: '))
+        return a - b
 
     def multiplication(self) -> float:
-        a = input(f'Give a number: ')
-        b = input(f'Give second number: ')
-        return int(a) * int(b)
+        a = float(input(f'Give a multiplicand: '))
+        b = float(input(f'Give a multiplier: '))
+        return a * b
 
     def division(self) -> float:
-        a = input(f'Give a number: ')
-        b = input(f'Give second number: ')
-        return int(a) / int(b)
+        a = float(input(f'Give a dividend: '))
+        b = float(input(f'Give a divisor: '))
+        return a / b
 
     def exponentiation(self) -> float:
-        a = input(f'Give a number: ')
-        b = input(f'Give second number: ')
-        return int(a) ** int(b)
+        a = float(input(f'Give a base of power: '))
+        b = float(input(f'Give a exponent: '))
+        return a ** b
 
-    def rooting(self) -> float:
-        a = input(f'Give a number: ')
-        return sqrt(int(a))
+    def square_root(self) -> float:
+        a = float(input(f'Give a number: '))
+        return sqrt(a)
 
     def square_area(self) -> float:
-        a = input(f'Give a number: ')
-        return int(a) * int(a)
+        a = float(input(f'Give a side lenght: a : '))
+        return a * a
 
     def rectangle_area(self) -> float:
-        a = input('Give a number:')
-        b = input('Give second number:')
-        return int(a) * int(b)
+        a = float(input(f'Give a side length: a : '))
+        b = float(input(f'Give a side length: b : '))
+        return a * b
 
     def triangle_area(self) -> float:
-        a = input('Give a number:')
-        h = input('Give second number:')
-        return int(a) * int(h) / 2
+        a = float(input(f'Give a base field: '))
+        h = float(input(f'Give a height of the triangle: '))
+        return a * h / 2
 
     def circle_area(self) -> float:
-        a = input('Give a number:')
+        a = float(input(f'Give a circle radius: '))
         return 3.14 * float(a) ** 2
 
     def print_available_functions(self):
@@ -57,7 +57,7 @@ class Calculator:
               '3 Multiplication\n'
               '4 Division\n'
               '5 Exponentiation\n'
-              '6 Rooting\n'
+              '6 Square root\n'
               '7 Square area\n'
               '8 Rectangle area\n'
               '9 Triangle area\n'
@@ -69,25 +69,25 @@ class Calculator:
             self.print_available_functions()
             user_input = int(input('Choose number (0 - 10): '))
             if user_input == 1:
-                print(self.addition())
+                print(f'The result is: {self.addition()}')
             elif user_input == 2:
-                print(self.subtraction())
+                print(f'The result is: {self.subtraction()}')
             elif user_input == 3:
-                print(self.multiplication())
+                print(f'The result is: {self.multiplication()}')
             elif user_input == 4:
-                print(self.division())
+                print(f'The result is: {self.division()}')
             elif user_input == 5:
-                print(self.exponentiation())
+                print(f'The result is: {self.exponentiation()}')
             elif user_input == 6:
-                print(self.rooting())
+                print(f'The result is: {self.square_root()}')
             elif user_input == 7:
-                print(self.square_area())
+                print(f'The result is: {self.square_area()}')
             elif user_input == 8:
-                print(self.rectangle_area())
+                print(f'The result is: {self.rectangle_area()}')
             elif user_input == 9:
-                print(self.triangle_area())
+                print(f'The result is: {self.triangle_area()}')
             elif user_input == 10:
-                print(self.circle_area())
+                print(f'The result is: {self.circle_area()}')
             elif user_input == 0:
                 break
             else:
