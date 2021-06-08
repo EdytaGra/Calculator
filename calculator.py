@@ -1,53 +1,53 @@
 from math import sqrt
+from typing import List
 
 
 class Calculator:
 
+    def get_user_input(self, list_of_messages: List[str]) -> List[float]:
+        result = []
+        for message in list_of_messages:
+            result.append(float((input(message))))
+        return result
+
     def addition(self) -> float:
-        a = float(input(f'Give a first summand: '))
-        b = float(input(f'Give a second summand: '))
+        a, b = self.get_user_input(['Give a first summand: ', 'Give a second summand: '])
         return a + b
 
     def subtraction(self) -> float:
-        a = float(input(f'Give a minuend: '))
-        b = float(input(f'Give a subtrahend: '))
+        a, b = self.get_user_input(['Give a minuend: ', 'Give a subtrahend: '])
         return a - b
 
     def multiplication(self) -> float:
-        a = float(input(f'Give a multiplicand: '))
-        b = float(input(f'Give a multiplier: '))
+        a, b = self.get_user_input(['Give a multiplicand: ', 'Give a multiplier: '])
         return a * b
 
     def division(self) -> float:
-        a = float(input(f'Give a dividend: '))
-        b = float(input(f'Give a divisor: '))
+        a, b = self.get_user_input(['Give a dividend: ', 'Give a divisor: '])
         return a / b
 
     def exponentiation(self) -> float:
-        a = float(input(f'Give a base of power: '))
-        b = float(input(f'Give a exponent: '))
+        a, b = self.get_user_input([' Give base of power: ', 'Give a exponent: '])
         return a ** b
 
     def square_root(self) -> float:
-        a = float(input(f'Give a number: '))
+        a = self.get_user_input(['Give a number: '])
         return sqrt(a)
 
     def square_area(self) -> float:
-        a = float(input(f'Give a side lenght: a : '))
+        a = self.get_user_input(['Give a side lenght: a : '])
         return a * a
 
     def rectangle_area(self) -> float:
-        a = float(input(f'Give a side length: a : '))
-        b = float(input(f'Give a side length: b : '))
+        a, b = self.get_user_input(['Give a side length: a : ', 'Give a side length: b : '])
         return a * b
 
     def triangle_area(self) -> float:
-        a = float(input(f'Give a base field: '))
-        h = float(input(f'Give a height of the triangle: '))
-        return a * h / 2
+        a, b = self.get_user_input(['Give a base field: ', 'Give a height of the triangle: '])
+        return a * b / 2
 
     def circle_area(self) -> float:
-        a = float(input(f'Give a circle radius: '))
+        a = self.get_user_input(['Give a circle radius: '])
         return 3.14 * float(a) ** 2
 
     def print_available_functions(self):
