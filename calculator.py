@@ -7,7 +7,7 @@ class Calculator:
     def get_user_input(self, list_of_messages: List[str]) -> List[float]:
         result = []
         for message in list_of_messages:
-            result.append(float((input(message))))
+            result.append(float(input(message)))
         return result
 
     def addition(self) -> float:
@@ -31,11 +31,11 @@ class Calculator:
         return a ** b
 
     def square_root(self) -> float:
-        a = self.get_user_input(['Give a number: '])
+        a, = self.get_user_input(['Give a number: '])
         return sqrt(a)
 
     def square_area(self) -> float:
-        a = self.get_user_input(['Give a side lenght: a : '])
+        a, = self.get_user_input(['Give a side lenght: a : '])
         return a * a
 
     def rectangle_area(self) -> float:
@@ -47,10 +47,11 @@ class Calculator:
         return a * b / 2
 
     def circle_area(self) -> float:
-        a = self.get_user_input(['Give a circle radius: '])
+        a, = self.get_user_input(['Give a circle radius: '])
         return 3.14 * float(a) ** 2
 
     def print_available_functions(self):
+
         print('Menu:\n'
               '1 Addition\n'
               '2 Subtraction\n'
@@ -58,6 +59,26 @@ class Calculator:
               '4 Division\n'
               '5 Exponentiation\n'
               '6 Square root\n'
+              '7 Square area\n'
+              '8 Rectangle area\n'
+              '9 Triangle area\n'
+              '10 Circle area\n'
+              '0 Exit')
+
+    def basic_functions(self):
+
+        print('Menu:\n'
+              '1 Addition\n'
+              '2 Subtraction\n'
+              '3 Multiplication\n'
+              '4 Division\n'
+              '5 Exponentiation\n'
+              '6 Square root\n'
+              '0 Exit')
+
+    def geometric_functions(self):
+
+        print('Menu:\n'
               '7 Square area\n'
               '8 Rectangle area\n'
               '9 Triangle area\n'
@@ -92,3 +113,12 @@ class Calculator:
                 break
             else:
                 print('Incorrect option selected')
+
+    def menu(self):
+        self.basic_functions()
+        self.geometric_functions()
+        user_input = int(input('Choose number (11 - 12): '))
+        if user_input == 11:
+            print(f'Basic functions')
+            Calculator.run(self)
+
