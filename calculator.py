@@ -50,9 +50,9 @@ class Calculator:
         a, = self.get_user_input(['Give a circle radius: '])
         return 3.14 * float(a) ** 2
 
-    def basic_functions(self):
+    def display_basic_arithmetic_functions(self):
 
-        print('Basic menu:\n'
+        print('Basic arithmetic functions menu:\n'
               '1 Addition\n'
               '2 Subtraction\n'
               '3 Multiplication\n'
@@ -61,18 +61,18 @@ class Calculator:
               '6 Square root\n'
               '0 Exit')
 
-    def geometric_functions(self):
+    def display_basic_geometric_functions(self):
 
-        print('Geometric menu:\n'
-              '7 Square area\n'
-              '8 Rectangle area\n'
-              '9 Triangle area\n'
-              '10 Circle area\n'
+        print('Basic geometric functions menu:\n'
+              '1 Square area\n'
+              '2 Rectangle area\n'
+              '3 Triangle area\n'
+              '4 Circle area\n'
               '0 Exit')
 
-    def run_basic(self):
+    def run_basic_arithmetic_functions(self):
         while True:
-            self.basic_functions()
+            self.display_basic_arithmetic_functions()
             user_input = int(input('Choose number (0 - 6): '))
             if user_input == 1:
                 print(f'The result is: {self.addition()}')
@@ -93,26 +93,35 @@ class Calculator:
 
     def run_geometric_functions(self):
         while True:
-            self.geometric_functions()
-            user_input = int(input('Choose number (7 - 10 or 0 for exit: '))
-            if user_input == 7:
+            self.display_basic_geometric_functions()
+            user_input = int(input('Choose number (0 - 4): '))
+            if user_input == 1:
                 print(f'The result is: {self.square_area()}')
-            elif user_input == 8:
+            elif user_input == 2:
                 print(f'The result is: {self.rectangle_area()}')
-            elif user_input == 9:
+            elif user_input == 3:
                 print(f'The result is: {self.triangle_area()}')
-            elif user_input == 10:
+            elif user_input == 4:
                 print(f'The result is: {self.circle_area()}')
             elif user_input == 0:
                 break
             else:
                 print('Incorrect option selected')
 
-    def menu(self):
-        self.basic_functions()
-        self.geometric_functions()
-        user_input = int(input('Choose number (11 - 12): '))
-        if user_input == 11:
-            print('Basic functions')
-        elif user_input == 12:
-            print('Geometric functions')
+    def display_main_menu(self):
+        while True:
+            self.display_basic_arithmetic_functions()
+            self.display_basic_geometric_functions()
+            user_input = int(input('Choose number (1 - 2): '))
+            if user_input == 1:
+                print(f'Basic arithmetic functions menu {self.run_basic_arithmetic_functions()}')
+            elif user_input == 2:
+                print(f'Geometric functions menu {self.display_basic_geometric_functions()}')
+            elif user_input == 0:
+                break
+            else:
+                print('Incorrect option selected')
+
+    def run(self):
+        print('_____CALCULATOR_____    ')
+        self.display_main_menu()
