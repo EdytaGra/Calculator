@@ -4,6 +4,16 @@ from typing import List
 
 class Calculator:
 
+    def __init__(self):
+        self.basic_arithmetic_functions = {
+            1: self.addition,
+            2: self.subtraction,
+            3: self.multiplication,
+            4: self.division,
+            5: self.exponentiation,
+            6: self.square_root
+        }
+
     def get_user_input(self, list_of_messages: List[str]) -> List[float]:
         result = []
         for message in list_of_messages:
@@ -73,25 +83,18 @@ class Calculator:
     def run_basic_arithmetic_functions(self):
         while True:
             self.display_basic_arithmetic_functions()
-            user_input = int(input('Choose number (0 - 6): '))
-            if user_input == 1:
-                print(f'The result is: {self.addition()}')
-            elif user_input == 2:
-                print(f'The result is: {self.subtraction()}')
-            elif user_input == 3:
-                print(f'The result is: {self.multiplication()}')
-            elif user_input == 4:
-                print(f'The result is: {self.division()}')
-            elif user_input == 5:
-                print(f'The result is: {self.exponentiation()}')
-            elif user_input == 6:
-                print(f'The result is: {self.square_root()}')
-            elif user_input == 0:
-                break
-            else:
-                print('Incorrect option selected')
-
-            input('Press enter to continue...')
+            try:
+                user_input = int(input(f'Choose number (0 - {len(self.basic_arithmetic_functions.keys())}): '))
+                result = self.basic_arithmetic_functions[user_input]()
+                print(f'The result is: {result}')
+                input('Press enter to continue...')
+            except KeyError:
+                if user_input == 0:
+                    break
+                else:
+                    print('Incorrect option selected!')
+            except ValueError:
+                print('Please enter numbers only!')
 
     def run_basic_geometric_functions(self):
         while True:
@@ -123,7 +126,7 @@ class Calculator:
             elif user_input == 0:
                 break
             else:
-                print('Incorrect option selected')
+                print('Incorrect option selected!')
 
     def run(self):
         print('_____CALCULATOR_____    ')
