@@ -91,7 +91,9 @@ class Calculator:
             else:
                 print('Incorrect option selected')
 
-    def run_geometric_functions(self):
+            input('Press enter to continue...')
+
+    def run_basic_geometric_functions(self):
         while True:
             self.display_basic_geometric_functions()
             user_input = int(input('Choose number (0 - 4): '))
@@ -108,15 +110,16 @@ class Calculator:
             else:
                 print('Incorrect option selected')
 
+            input('Press enter to continue...')
+
     def display_main_menu(self):
         while True:
-            self.display_basic_arithmetic_functions()
-            self.display_basic_geometric_functions()
+            print('1 Basic arithmetic functions menu\n2 Basic geometric functions menu\n0 Exit')
             user_input = int(input('Choose number (1 - 2): '))
             if user_input == 1:
-                print(f'Basic arithmetic functions menu {self.run_basic_arithmetic_functions()}')
+                self.run_basic_arithmetic_functions()
             elif user_input == 2:
-                print(f'Geometric functions menu {self.display_basic_geometric_functions()}')
+                self.run_basic_geometric_functions()
             elif user_input == 0:
                 break
             else:
