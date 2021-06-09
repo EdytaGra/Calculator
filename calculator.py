@@ -13,6 +13,12 @@ class Calculator:
             5: self.exponentiation,
             6: self.square_root
         }
+        self.basic_geometric_functions = {
+            1: self.square_area,
+            2: self.rectangle_area,
+            3: self.triangle_area,
+            4: self.circle_area
+        }
 
     def get_user_input(self, list_of_messages: List[str]) -> List[float]:
         result = []
@@ -99,21 +105,18 @@ class Calculator:
     def run_basic_geometric_functions(self):
         while True:
             self.display_basic_geometric_functions()
-            user_input = int(input('Choose number (0 - 4): '))
-            if user_input == 1:
-                print(f'The result is: {self.square_area()}')
-            elif user_input == 2:
-                print(f'The result is: {self.rectangle_area()}')
-            elif user_input == 3:
-                print(f'The result is: {self.triangle_area()}')
-            elif user_input == 4:
-                print(f'The result is: {self.circle_area()}')
-            elif user_input == 0:
-                break
-            else:
-                print('Incorrect option selected')
-
-            input('Press enter to continue...')
+            try:
+                user_input = int(input(f'Choose number (0 - {len(self.basic_geometric_functions.keys())}): '))
+                result = self.basic_geometric_functions[user_input]()
+                print(f'The result is: {result}')
+                input('Press enter to continue...')
+            except KeyError:
+                if user_input == 0:
+                    break
+                else:
+                    print('Incorrect option selected!')
+            except ValueError:
+                print('Please enter numbers only!')
 
     def display_main_menu(self):
         while True:
