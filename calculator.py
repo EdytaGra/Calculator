@@ -129,10 +129,10 @@ class Calculator:
 
     def run_main_menu(self):
         while True:
-            user_input = int(input(f'Choose number (0 - 2): '))
+            self.display_main_menu()
             try:
-                result = self.run_main_menu[user_input]()
-                print(result)
+                user_input = int(input(f'Choose number (0 - {len(self.main_menu.keys())}): '))
+                self.main_menu[user_input]()
             except KeyError:
                 if user_input == 0:
                     break
@@ -143,4 +143,4 @@ class Calculator:
 
     def run(self):
         print('_____CALCULATOR_____')
-        self.display_main_menu()
+        self.run_main_menu()
