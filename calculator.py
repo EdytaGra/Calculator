@@ -1,3 +1,4 @@
+import math
 from math import sqrt
 from typing import List
 
@@ -18,6 +19,10 @@ class Calculator:
             2: self.rectangle_area,
             3: self.triangle_area,
             4: self.circle_area
+        }
+        self.main_menu = {
+            1: self.run_basic_arithmetic_functions,
+            2: self.run_basic_geometric_functions
         }
 
     def get_user_input(self, list_of_messages: List[str]) -> List[float]:
@@ -64,7 +69,7 @@ class Calculator:
 
     def circle_area(self) -> float:
         a, = self.get_user_input(['Give a circle radius: '])
-        return 3.14 * float(a) ** 2
+        return math.pi * float(a) ** 2
 
     def display_basic_arithmetic_functions(self):
 
@@ -85,6 +90,10 @@ class Calculator:
               '3 Triangle area\n'
               '4 Circle area\n'
               '0 Exit')
+
+    def display_main_menu(self):
+
+        print('1 Basic arithmetic functions menu\n2 Basic geometric functions menu\n0 Exit')
 
     def run_basic_arithmetic_functions(self):
         while True:
@@ -118,19 +127,20 @@ class Calculator:
             except ValueError:
                 print('Please enter numbers only!')
 
-    def display_main_menu(self):
+    def run_main_menu(self):
         while True:
-            print('1 Basic arithmetic functions menu\n2 Basic geometric functions menu\n0 Exit')
-            user_input = int(input('Choose number (1 - 2): '))
-            if user_input == 1:
-                self.run_basic_arithmetic_functions()
-            elif user_input == 2:
-                self.run_basic_geometric_functions()
-            elif user_input == 0:
-                break
-            else:
-                print('Incorrect option selected!')
+            user_input = int(input(f'Choose number (0 - 2): '))
+            try:
+                result = self.run_main_menu[user_input]()
+                print(result)
+            except KeyError:
+                if user_input == 0:
+                    break
+                else:
+                    print('Incorrect option selected!')
+            except ValueError:
+                print('Please enter numbers only!')
 
     def run(self):
-        print('_____CALCULATOR_____    ')
+        print('_____CALCULATOR_____')
         self.display_main_menu()
