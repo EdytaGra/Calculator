@@ -42,11 +42,13 @@ class TestCalculator:
             mocked_input.return_value = [a, b]
             assert setup_calc.multiplication() == a * b
 
-    #def test_division_input_not_ok(self, setup_calc):
-     #   with pytest.raises(ValueError), \
-      #          mock.patch('builtins.input') as mocked_input:
-       #         mocked_input.return_value =
-        #        setup_calc.get_user_input(' ')
+    @pytest.mark.parametrize('a', [1, 10, 0.1, -1, 0, -0.1, 100])
+    @pytest.mark.parametrize('b', [0])
+    def test_division_input_not_ok(self, setup_calc, a, b):
+        with pytest.raises(ZeroDivisionError), \
+                mock.patch('calculator.Calculator.get_user_input') as mocked_input:
+            mocked_input.return_value = [a, b]
+            assert setup_calc.division() == a / b
 
     @pytest.mark.parametrize('a', [1, 10, 0.1, -1, 0, -0.1, 100])
     @pytest.mark.parametrize('b', [3, 4, 1, -2, 0.5, -0.5, 50])
