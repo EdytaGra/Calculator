@@ -16,14 +16,17 @@ class TestCalculator:
             messages = ['' for x in inputs]
             assert setup_calc.get_user_input(messages) == result
 
+    def test_addition_input_not_ok(self, setup_calc):
+        with pytest.raises(ValueError), \
+                mock.patch('builtins.input') as mocked_input:
+            mocked_input.return_value = 'some string'
+            setup_calc.get_user_input(' ')
+
     @pytest.mark.parametrize('a, b', [(1, 2), (0.9, 0.2), (10, 8), (-1, 9)])
     def test_addition(self, setup_calc, a, b):
         with mock.patch('calculator.Calculator.get_user_input') as mocked_input:
             mocked_input.return_value = [a, b]
             assert setup_calc.addition() == a + b
-
-    def test_addition_input_not_ok(self):
-        pass
 
     @pytest.mark.parametrize('a', [1, 4, 0.7, -1, -0.2, 86, 2222])
     @pytest.mark.parametrize('b', [6, 2.6, 1, -1, 5, 100, 0])
