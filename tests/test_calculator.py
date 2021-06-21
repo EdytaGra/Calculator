@@ -20,7 +20,7 @@ class TestCalculator:
         with pytest.raises(ValueError), \
                 mock.patch('builtins.input') as mocked_input:
             mocked_input.return_value = 'some string'
-            setup_calc.get_user_input(' ')  # można wpisać do środka liczby ,to jest ok?
+            setup_calc.get_user_input(' ')
 
     @pytest.mark.parametrize('a, b', [(1, 2), (0.9, 0.2), (10, 8), (-1, 9)])
     def test_addition(self, setup_calc, a, b):
