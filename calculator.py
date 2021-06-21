@@ -69,7 +69,7 @@ class Calculator:
 
     def circle_area(self) -> float:
         a, = self.get_user_input(['Give a circle radius: '])
-        return math.pi * float(a) ** 2
+        return math.pi * a ** 2
 
     def display_basic_arithmetic_functions(self):
 
