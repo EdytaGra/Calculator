@@ -20,7 +20,7 @@ class TestCalculator:
         with pytest.raises(ValueError), \
                 mock.patch('builtins.input') as mocked_input:
             mocked_input.return_value = 'some string'
-            setup_calc.get_user_input(' ')
+            setup_calc.get_user_input(' ')  # można wpisać do środka liczby ,to jest ok?
 
     @pytest.mark.parametrize('a, b', [(1, 2), (0.9, 0.2), (10, 8), (-1, 9)])
     def test_addition(self, setup_calc, a, b):
@@ -63,6 +63,19 @@ class TestCalculator:
         with mock.patch('calculator.Calculator.get_user_input') as mocked_input:
             mocked_input.return_value = [a, b]
             assert setup_calc.exponentiation() == a ** b
+
+    def test_square_root_input_not_ok(self, setup_calc):
+        with pytest.raises(ValueError), \
+                mock.patch('builtins.input') as mocked_input:
+            mocked_input.return_value = 'lala'
+            setup_calc.get_user_input(' ')
+
+    @pytest.mark.parametrize('a', [-1, -0.1, -10])
+    def test_square_root_input_not_ok2(self, setup_calc, a):
+        with pytest.raises(ValueError), \
+                mock.patch('calculator.Calculator.get_user_input') as mocked_input:
+            mocked_input.return_value = [a]
+            assert setup_calc.square_root() == sqrt(a)
 
     @pytest.mark.parametrize('a', [1, 10, 0.1, 30, 3, 0.1, 100])
     def test_square_root(self, setup_calc, a):
