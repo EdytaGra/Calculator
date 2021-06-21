@@ -8,6 +8,13 @@ import pytest
 @pytest.mark.usefixtures('setup_calc')
 class TestCalculator:
 
+    @pytest.mark.parametrize('a', ['1.1', '-1.0', '0.5', '2', '-0.1'])
+    @pytest.mark.parametrize('b', [1.1, -1.0, 0.5, 2, -0.1])
+    def test_get_user_input_ok(self, setup_calc, a, b):
+        with mock.patch('builtins.input()') as mocked_input:
+            mocked_input.side_effect = ['1.1', '-1.0', '0.5', '2', '-0.1']
+            assert setup_calc.get_user_input([]) == b[1.1, -1.0, 0.5, 2, -0.1]
+
     @pytest.mark.parametrize('a, b', [(1, 2), (0.9, 0.2), (10, 8), (-1, 9)])
     def test_addition(self, setup_calc, a, b):
         with mock.patch('calculator.Calculator.get_user_input') as mocked_input:
