@@ -42,7 +42,7 @@ class TestCalculator:
             mocked_input.return_value = [a, b]
             assert setup_calc.multiplication() == a * b
 
-    def test_ZeroDivisionError(self, setup_calc):
+    def test_zero_division_error(self, setup_calc):
         with pytest.raises(ZeroDivisionError), \
                 mock.patch('calculator.Calculator.get_user_input') as mocked_input:
             mocked_input.return_value = [1, 0]
@@ -63,7 +63,7 @@ class TestCalculator:
             assert setup_calc.exponentiation() == a ** b
 
     @pytest.mark.parametrize('a', [-1, -0.1, -10])
-    def test_square_root_input_not_ok2(self, setup_calc, a):
+    def test_value_error_in_square_root(self, setup_calc, a):
         with pytest.raises(ValueError), \
                 mock.patch('calculator.Calculator.get_user_input') as mocked_input:
             mocked_input.return_value = [a]
