@@ -16,13 +16,6 @@ class TestCalculator:
             messages = ['' for x in inputs]
             assert setup_calc.get_user_input(messages) == result
 
-    def test_value_error_in_square_area(self, inputs):
-        with mock.patch('calculator.Calculator.get_user_input') as mocked_input:
-            mocked_input.side_effect = inputs
-            result = [float(x) for x in inputs]
-
-
-
     def test_get_user_input_input_incorrect(self, setup_calc):
         with pytest.raises(ValueError), \
                 mock.patch('builtins.input') as mocked_input:
@@ -49,12 +42,6 @@ class TestCalculator:
             mocked_input.return_value = [a, b]
             assert setup_calc.multiplication() == a * b
 
-    def test_zero_division_error(self, setup_calc):
-        with pytest.raises(ZeroDivisionError), \
-                mock.patch('calculator.Calculator.get_user_input') as mocked_input:
-            mocked_input.return_value = [1, 0]
-            setup_calc.division()
-
     @pytest.mark.parametrize('a', [1, 0.1, -1, 0, -0.1])
     @pytest.mark.parametrize('b', [3, 0.4, -6, -2, 0.5])
     def test_division(self, setup_calc, a, b):
@@ -62,23 +49,29 @@ class TestCalculator:
             mocked_input.return_value = [a, b]
             assert setup_calc.division() == a / b
 
-    @pytest.mark.parametrize('a', [1, 0.1, -3, 0.6, 0])
-    @pytest.mark.parametrize('b', [3, 0.7, -2, 0.5, 1])
+    def test_zero_division_error(self, setup_calc):
+        with pytest.raises(ZeroDivisionError), \
+                mock.patch('calculator.Calculator.get_user_input') as mocked_input:
+            mocked_input.return_value = [1, 0]
+            setup_calc.division()
+
+    @pytest.mark.parametrize('a', [1, 0.1, -3, 0.6])
+    @pytest.mark.parametrize('b', [3, 0.7, -2, 0.5, 0])
     def test_exponentiation(self, setup_calc, a, b):
         with mock.patch('calculator.Calculator.get_user_input') as mocked_input:
             mocked_input.return_value = [a, b]
             assert setup_calc.exponentiation() == a ** b
 
+    @pytest.mark.parametrize('a', [1, 0.1, 2.3])
+    def test_square_root(self, setup_calc, a):
+        with mock.patch('calculator.Calculator.get_user_input') as mocked_input:
+            mocked_input.return_value = [a]
+            assert setup_calc.square_root() == sqrt(a)
+
     @pytest.mark.parametrize('a', [-1, -0.1, -10])
     def test_value_error_in_square_root(self, setup_calc, a):
         with pytest.raises(ValueError), \
                 mock.patch('calculator.Calculator.get_user_input') as mocked_input:
-            mocked_input.return_value = [a]
-            assert setup_calc.square_root() == sqrt(a)
-
-    @pytest.mark.parametrize('a', [1, 0.1, 2.3])
-    def test_square_root(self, setup_calc, a):
-        with mock.patch('calculator.Calculator.get_user_input') as mocked_input:
             mocked_input.return_value = [a]
             assert setup_calc.square_root() == sqrt(a)
 
@@ -102,7 +95,7 @@ class TestCalculator:
             assert setup_calc.rectangle_area() == a * b
 
     def test_value_error_in_rectangle_area(self, setup_calc):
-        with pytest.raises(ValueError),\
+        with pytest.raises(ValueError), \
                 mock.patch('calculator.Calculator.get_user_input') as mocked_input:
             mocked_input.return_value = [-1]
             setup_calc.rectangle_area()
@@ -115,7 +108,7 @@ class TestCalculator:
             assert setup_calc.triangle_area() == a * b / 2
 
     def test_value_error_in_triangle_area(self, setup_calc):
-        with pytest.raises(ValueError),\
+        with pytest.raises(ValueError), \
                 mock.patch('calculator.Calculator.get_user_input') as mocked_input:
             mocked_input.return_value = [-1]
             setup_calc.triangle_area()
@@ -127,7 +120,7 @@ class TestCalculator:
             assert setup_calc.circle_area() == math.pi * a ** 2
 
     def test_value_error_in_circle_area(self, setup_calc):
-        with pytest.raises(ValueError),\
+        with pytest.raises(ValueError), \
                 mock.patch('calculator.Calculator.get_user_input') as mocked_input:
             mocked_input.return_value = [-1, 0]
             setup_calc.circle_area()
