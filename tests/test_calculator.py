@@ -9,14 +9,14 @@ import pytest
 class TestCalculator:
 
     @pytest.mark.parametrize('inputs', [['1.1', '-1.0', '0.5', '0.0'], ['2', '-0.1', '-1'], ['-10.0', '-0.3', '-99.0']])
-    def test_get_user_input_input_ok(self, setup_calc, inputs):
+    def test_get_user_input_ok_input(self, setup_calc, inputs):
         with mock.patch('builtins.input') as mocked_input:
             mocked_input.side_effect = inputs
             result = [float(x) for x in inputs]
             messages = ['' for x in inputs]
             assert setup_calc.get_user_input(messages) == result
 
-    def test_get_user_input_input_incorrect(self, setup_calc):
+    def test_get_user_input_incorrect_input(self, setup_calc):
         with pytest.raises(ValueError), \
                 mock.patch('builtins.input') as mocked_input:
             mocked_input.return_value = 'some string'
@@ -100,12 +100,19 @@ class TestCalculator:
             mocked_input.return_value = [-1]
             setup_calc.rectangle_area()
 
-    @pytest.mark.parametrize('a', [1, -0.1, 0, -3, 0.1])
-    @pytest.mark.parametrize('b', [3, -0.4, 1, -2, 0.5])
-    def test_triangle_area(self, setup_calc, a, b):
+    @pytest.mark.parametrize('a', [1, 1.4, 3, 99])
+    @pytest.mark.parametrize('b', [9, 0.4, 1, 2.7, 78])
+    def test_triangle_area_ok_input(self, setup_calc, a, b):
         with mock.patch('calculator.Calculator.get_user_input') as mocked_input:
             mocked_input.return_value = [a, b]
             assert setup_calc.triangle_area() == a * b / 2
+
+    @pytest.mark.parametrize('a', [-1, 0, -0.1, -3.8, -3, -98])
+    @pytest.mark.parametrize('b', [-100, -0.4, -1.9, -2, -0.5])
+    def test_triangle_area_incorrect_input(self, setup_calc, a, b):
+        with mock.patch('calculator.Calculator.get_user_input') as mocked_input:
+            mocked_input.return_value = [a, b]
+            assert setup_calc.triangle_area() == None
 
     def test_value_error_in_triangle_area(self, setup_calc):
         with pytest.raises(ValueError), \
@@ -113,11 +120,17 @@ class TestCalculator:
             mocked_input.return_value = [-1]
             setup_calc.triangle_area()
 
-    @pytest.mark.parametrize('a', [1, -0.1, 0, -3, 0.1])
-    def test_circle_area(self, setup_calc, a):
+    @pytest.mark.parametrize('a', [1, 0.1, 1.5, 99])
+    def test_circle_area_ok_input(self, setup_calc, a):
         with mock.patch('calculator.Calculator.get_user_input') as mocked_input:
             mocked_input.return_value = [a]
             assert setup_calc.circle_area() == math.pi * a ** 2
+
+    @pytest.mark.parametrize('a', [-0.1, -3, 0, -5.1, -99])
+    def test_circle_area_incorrect_input(self, setup_calc, a):
+        with mock.patch('calculator.Calculator.get_user_input') as mocked_input:
+            mocked_input.return_value = [a]
+            assert setup_calc.circle_area() == -1
 
     def test_value_error_in_circle_area(self, setup_calc):
         with pytest.raises(ValueError), \

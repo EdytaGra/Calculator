@@ -57,10 +57,10 @@ class Calculator:
 
     def square_area(self) -> float:
         a, = self.get_user_input(['Give a side lenght: a : '])
-        if a >= 1:
-            return a * a
-        else:
+        while a < 0:
             print('Incorrect number!\nPlease select a number greater than 0')
+            a, = self.get_user_input(['Give a side lenght: a : '])
+        return a * a
 
     def rectangle_area(self) -> float:
         a, b = self.get_user_input(['Give a side length: a : ', 'Give a side length: b : '])
@@ -68,20 +68,23 @@ class Calculator:
             return a * b
         else:
             print('Incorrect number!\nPlease select a number greater than 0')
+            return self.rectangle_area()
 
     def triangle_area(self) -> float:
         a, b = self.get_user_input(['Give a base field: ', 'Give a height of the triangle: '])
-        if a >= 1 and b >= 1:
+        if a >= 0.01 and b >= 0.01:
             return a * b / 2
         else:
             print('Incorrect number!\nPlease select a number greater than 0')
+            return None
 
     def circle_area(self) -> float:
         a, = self.get_user_input(['Give a circle radius: '])
-        if a >= 1:
+        if a >= 0.01:
             return math.pi * a ** 2
         else:
             print('Incorrect number!\nPlease select a number greater than 0')
+            return -1
 
     def display_basic_arithmetic_functions(self):
 
